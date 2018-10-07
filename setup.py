@@ -3,16 +3,9 @@ import pip
 from setuptools import setup
 
 
-requires = []
-requirements = pip.req.parse_requirements('requirements.txt',session=pip.download.PipSession())
+with open('requirements.txt') as f:
+    requires = f.read().strip().split('\n')
 
-for item in requirements:
-    if getattr(item, 'url', None):  # older pip has url
-        links.append(str(item.url))
-    if getattr(item, 'link', None): # newer pip has link
-        links.append(str(item.link))
-    if item.req:
-        requires.append(str(item.req))
 
 setup(
     name='topronounce',
